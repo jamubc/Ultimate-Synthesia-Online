@@ -7,10 +7,11 @@
 
 ## Screenshots
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-  <img width="457" alt="screenshot 2025-05-20 at 16 37 17" src="https://github.com/user-attachments/assets/88d29ace-ad69-4468-a4f7-ec8ff1fdbf84" />
-  <img width="457" alt="screenshot 2025-05-20 at 16 37 28" src="https://github.com/user-attachments/assets/552c0dfd-1b03-4855-a1fd-f3865a0ea10e" />
-  <img width="457" alt="screenshot 2025-05-20 at 16 37 32" src="https://github.com/user-attachments/assets/df308f9f-4c5b-4002-af3b-172bee9513d7" />
-  <img width="457" alt="screenshot 2025-05-20 at 16 37 44" src="https://github.com/user-attachments/assets/2c362268-63b0-4501-972a-553e23dbbcda" />
+<img width="457" alt="screenshot 2025-05-20 at 16 37 28" src="https://github.com/user-attachments/assets/16398921-0303-4106-9279-6b4a1f4c581a" />
+<img width="457" alt="screenshot 2025-05-20 at 16 37 32" src="https://github.com/user-attachments/assets/be410b76-7fef-44e8-9d72-fef003801aa4" />
+<img width="457" alt="screenshot 2025-05-20 at 16 37 40" src="https://github.com/user-attachments/assets/210379a3-2cb3-405e-a65e-d9cfb7f9a8ee" />
+<img width="457" alt="screenshot 2025-05-20 at 16 37 44" src="https://github.com/user-attachments/assets/734b80de-4713-4822-8bd0-e84c7cef115e" />
+
 </div>
 
 Ultimate Synthesia Online is a feature-rich web-based synthesizer application built with HTML, CSS, and JavaScript using the Web Audio API. It allows users to generate and manipulate sounds through a virtual keyboard, computer keyboard, or MIDI input. The application includes multiple oscillators, ADSR envelope controls, filters, a "Synthesia"-style falling notes visualizer, a multi-slot looper, a metronome with tap tempo, and various UI customization options.
