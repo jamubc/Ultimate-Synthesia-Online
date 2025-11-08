@@ -1,0 +1,249 @@
+═══════════════════════════════════════════════════════════════════════════════
+   ULTIMATE SYNTHESIA ONLINE - ADVANCED ROUTING SIGNAL FLOW DIAGRAM
+═══════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            INPUT SOURCES                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+        │                    │                    │
+    [MIDI KB]           [Synthesizer]        [Sampler]
+        │                    │                    │
+        └────────────────────┴────────────────────┘
+                             │
+                             ▼
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         MIXER CHANNELS (8 Tracks)                           │
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐  │
+│  │ TRACK 1-8                                                            │  │
+│  │                                                                      │  │
+│  │  Input → [Gain] → [Pan] → [Analyser]                               │  │
+│  │              │        │                                             │  │
+│  │              │        └─→ Send Controls ──┐                         │  │
+│  │              │           ├─ AUX 1 (0-100%)│                         │  │
+│  │              │           ├─ AUX 2 (0-100%)│                         │  │
+│  │              │           ├─ AUX 3 (0-100%)│                         │  │
+│  │              │           ├─ AUX 4 (0-100%)│                         │  │
+│  │              │           ├─ AUX 5 (0-100%)│                         │  │
+│  │              │           └─ AUX 6 (0-100%)│                         │  │
+│  │              │                             │                         │  │
+│  │              └─→ [Optional Sidechain       │                         │  │
+│  │                   Compressor]              │                         │  │
+│  │                        │                   │                         │  │
+│  │                        ▼                   ▼                         │  │
+│  │              ┌──────────────────┐   ┌──────────────┐                │  │
+│  │              │  Direct Output   │   │  Aux Sends   │                │  │
+│  │              │  To:             │   │  (Parallel)  │                │  │
+│  │              │  • Master        │   └──────┬───────┘                │  │
+│  │              │  • Group         │          │                         │  │
+│  │              │  • Bus           │          │                         │  │
+│  │              └────────┬─────────┘          │                         │  │
+│  └──────────────────────┼────────────────────┼─────────────────────────┘  │
+└────────────────────────┼────────────────────┼────────────────────────────┘
+                         │                    │
+                         │                    └──────────────────┐
+                         │                                        │
+                         ▼                                        ▼
+
+┌────────────────────────────────────┐    ┌─────────────────────────────────┐
+│      ROUTING DESTINATIONS          │    │    AUX SEND/RETURN SYSTEM       │
+│                                    │    │                                 │
+│  ┌──────────────────────────────┐ │    │  ┌──────────────────────────┐  │
+│  │  TRACK GROUPS (Submixes)     │ │    │  │  AUX 1 (Reverb)          │  │
+│  │                              │ │    │  │  Input ← Sum of Sends    │  │
+│  │  ┌────────────────────┐     │ │    │  │    ↓                      │  │
+│  │  │ Input (from tracks)│     │ │    │  │  [Convolver/Effect]      │  │
+│  │  │        ↓           │     │ │    │  │    ↓                      │  │
+│  │  │  [Bus Compressor]  │     │ │    │  │  Return Gain (0-100%)    │  │
+│  │  │  • Threshold: -24dB│     │ │    │  │    ↓                      │  │
+│  │  │  • Ratio: 4:1      │     │ │    │  │  To Master               │  │
+│  │  │  • Attack: 3ms     │     │ │    │  └──────────────────────────┘  │
+│  │  │  • Release: 250ms  │     │ │    │                                 │
+│  │  │        ↓           │     │ │    │  AUX 2-6: Same structure        │
+│  │  │  [Group Gain]      │     │ │    │  with different effects:        │
+│  │  │        ↓           │     │ │    │  • Delay                        │
+│  │  │  [Group Pan]       │     │ │    │  • Chorus                       │
+│  │  │        ↓           │     │ │    │  • Flanger                      │
+│  │  │  [Analyser]        │     │ │    │  • Phaser                       │
+│  │  │        ↓           │     │ │    │  • Custom                       │
+│  │  │  To Master         │     │ │    └─────────────────────────────────┘
+│  │  └────────────────────┘     │ │                    │
+│  │                              │ │                    │
+│  │  Can contain:                │ │                    │
+│  │  • Multiple tracks           │ │                    │
+│  │  • Nested groups             │ │                    │
+│  │  • Own send routing          │ │                    │
+│  └──────────────────────────────┘ │                    │
+│                                    │                    │
+│  ┌──────────────────────────────┐ │                    │
+│  │  CUSTOM BUSES                │ │                    │
+│  │                              │ │                    │
+│  │  Input (from tracks)         │ │                    │
+│  │        ↓                     │ │                    │
+│  │  [Peaking EQ]                │ │                    │
+│  │  • Freq: 1000Hz              │ │                    │
+│  │  • Q: 1.0                    │ │                    │
+│  │  • Gain: 0dB                 │ │                    │
+│  │        ↓                     │ │                    │
+│  │  [Compressor]                │ │                    │
+│  │  • Threshold: -20dB          │ │                    │
+│  │  • Ratio: 3:1                │ │                    │
+│  │        ↓                     │ │                    │
+│  │  [Bus Gain]                  │ │                    │
+│  │        ↓                     │ │                    │
+│  │  [Bus Pan]                   │ │                    │
+│  │        ↓                     │ │                    │
+│  │  To Master                   │ │                    │
+│  └──────────────────────────────┘ │                    │
+└────────────────────────────────────┘                    │
+                         │                                │
+                         └────────────────┬───────────────┘
+                                          │
+                                          ▼
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           SIDECHAIN COMPRESSION                             │
+│                                                                             │
+│  Source Track (e.g., Kick Drum)        Target Track (e.g., Bass)           │
+│         │                                      │                            │
+│         ├─→ Main Output                       │                            │
+│         │                                      │                            │
+│         └─→ Analyser → [Sidechain Gain] ─────→ [Compressor Control]        │
+│                        (1.5x boost)             ↓                           │
+│                                           Input → [Compressor] → Output     │
+│                                                  • Threshold: -30dB         │
+│                                                  • Ratio: 12:1              │
+│                                                  • Attack: 1ms              │
+│                                                  • Release: 250ms           │
+│                                                                             │
+│  Result: When kick hits, bass volume ducks automatically                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                          │
+                                          ▼
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              MASTER OUTPUT                                  │
+│                                                                             │
+│  Inputs from:                                                               │
+│  ├─ Direct track outputs (8 channels)                                      │
+│  ├─ Group outputs (variable)                                               │
+│  ├─ Bus outputs (variable)                                                 │
+│  └─ Aux returns (6 channels)                                               │
+│                                                                             │
+│  Signal Flow:                                                               │
+│  All Inputs → [Master Gain] → [Master Limiter] → [Analyser] → Output       │
+│                                                                             │
+│  Master Limiter:                                                            │
+│  • Threshold: -3dB                                                          │
+│  • Ratio: 20:1 (brick wall limiting)                                       │
+│  • Attack: 3ms                                                              │
+│  • Release: 100ms                                                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                          │
+                                          ▼
+                                   [AUDIO OUTPUT]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                         ROUTING MATRIX VISUALIZATION
+═══════════════════════════════════════════════════════════════════════════════
+
+Left Side                 Center                    Right Side
+(Sources)            (Processing)              (Destinations)
+
+T1 ●────────────┬──────→ A1 ● (Reverb) ────────┐
+T2 ●─────┬──────┼──────→ A2 ● (Delay)  ────────┤
+T3 ●─────┼──────┼──────→ A3 ● (Chorus) ────────┤
+T4 ●─────┼──────┤         :                     │
+T5 ●─────┼──────┤         :                     ├──→ M ● (Master)
+T6 ●─────┼──────┘       A6 ●                    │
+T7 ●─────┼────────────→ G1 ● (Group) ──────────┤
+T8 ●─────┘                                      │
+         └───────────→ B1 ● (Bus) ──────────────┘
+
+Legend:
+● Tracks (T)      ─── Normal routing
+● Aux (A)         ~~~ Send routing (variable strength)
+● Groups (G)      - - Sidechain
+● Buses (B)
+● Master (M)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                            WEB AUDIO NODE GRAPH
+═══════════════════════════════════════════════════════════════════════════════
+
+Per Track (x8):
+  GainNode ──→ PanNode ──→ AnalyserNode ──┬──→ Destination
+                             │             │
+                             └─→ 6x SendGainNodes ──→ Aux Inputs
+
+Per Aux Channel (x6):
+  InputGain ──→ ConvolverNode ──→ OutputGain ──→ AnalyserNode ──→ Master
+
+Per Group:
+  EffectChain.Input ──→ Compressor ──→ GroupGain ──→ GroupPan ──→ Analyser ──→ Master
+
+Per Bus:
+  EffectChain.Input ──→ EQ ──→ Compressor ──→ BusGain ──→ BusPan ──→ Analyser ──→ Master
+
+Sidechain:
+  SourceAnalyser ──→ SidechainGain ──→ (Compressor control signal)
+  TargetGain ──→ Compressor ──→ TargetPan
+
+Master:
+  MasterGain ──→ MasterLimiter ──→ MasterAnalyser ──→ AudioContext.destination
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                               NODE COUNT SUMMARY
+═══════════════════════════════════════════════════════════════════════════════
+
+Base System (8 tracks + master):
+  • 8 tracks × 3 nodes (gain, pan, analyser)     = 24 nodes
+  • Master chain                                  =  3 nodes
+                                              Total: 27 nodes
+
+Advanced Routing Addition:
+  • 6 aux channels × 5 nodes each                = 30 nodes
+  • 8 tracks × 6 send gains                      = 48 nodes
+  • Groups (variable, e.g., 3 groups × 4 nodes)  = 12 nodes
+  • Buses (variable, e.g., 2 buses × 5 nodes)    = 10 nodes
+  • Sidechains (variable, e.g., 2 × 2 nodes)     =  4 nodes
+                                              Total: 104 nodes
+
+Grand Total (typical session):                ~131 Web Audio nodes
+
+Maximum theoretical (all features):           ~200 nodes
+Performance impact:                           Minimal (well within browser limits)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                                 LATENCY ANALYSIS
+═══════════════════════════════════════════════════════════════════════════════
+
+Direct Path (Track → Master):
+  Input → Gain → Pan → Analyser → Master
+  Latency: ~0ms (direct connection, no processing)
+
+Aux Send Path:
+  Input → Gain → Pan → Send → Aux Effect → Return → Master
+  Latency: ~0-10ms (depending on effect type)
+  • Reverb: Convolution ~5-10ms
+  • Delay: User-controlled
+  • Chorus/Flanger: <1ms
+
+Group Path:
+  Input → Gain → Pan → Analyser → Group Comp → Group Gain → Pan → Master
+  Latency: <1ms (compressor lookahead minimal)
+
+Sidechain Path:
+  Source → Analyser → Sidechain Gain → Compressor control
+  Target → Gain → Compressor → Pan → Output
+  Latency: ~1-3ms (compressor attack time)
+
+Overall System Latency: <10ms for most paths (inaudible)
+
+
+═══════════════════════════════════════════════════════════════════════════════

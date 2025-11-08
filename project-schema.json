@@ -1,0 +1,380 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ultimate Synthesia Online Project File",
+  "description": "Complete project state schema for Ultimate Synthesia Online DAW",
+  "type": "object",
+  "required": ["version", "projectName", "timestamp"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Project file format version",
+      "example": "1.0"
+    },
+    "projectName": {
+      "type": "string",
+      "description": "User-defined project name",
+      "example": "My Awesome Track"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of save",
+      "example": "2025-11-08T12:34:56.789Z"
+    },
+    "synth": {
+      "type": "object",
+      "description": "All synthesizer parameters",
+      "properties": {
+        "osc1": {
+          "type": "object",
+          "properties": {
+            "waveform": { "type": "string", "enum": ["sine", "square", "sawtooth", "triangle", "pulse"] },
+            "octave": { "type": "integer", "minimum": 2, "maximum": 6 },
+            "detune": { "type": "number", "minimum": -100, "maximum": 100 },
+            "level": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "osc2": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "waveform": { "type": "string", "enum": ["sine", "square", "sawtooth", "triangle", "pulse"] },
+            "octave": { "type": "integer", "minimum": -2, "maximum": 2 },
+            "fineTune": { "type": "number", "minimum": -100, "maximum": 100 },
+            "delay": { "type": "number", "minimum": 0, "maximum": 50 },
+            "level": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "sub": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "waveform": { "type": "string", "enum": ["sine", "square", "triangle"] },
+            "octave": { "type": "integer", "enum": [-1, -2] },
+            "level": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "noise": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "type": { "type": "string", "enum": ["white", "pink"] },
+            "level": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "pulseWidth": { "type": "number", "minimum": 0.01, "maximum": 0.99 },
+        "oscSlop": { "type": "number", "minimum": 0, "maximum": 0.1 },
+        "adsr": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "attack": { "type": "number", "minimum": 0.001, "maximum": 2 },
+            "decay": { "type": "number", "minimum": 0.001, "maximum": 2 },
+            "sustain": { "type": "number", "minimum": 0, "maximum": 1 },
+            "release": { "type": "number", "minimum": 0.001, "maximum": 5 }
+          }
+        },
+        "filter": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "type": { "type": "string", "enum": ["lowpass", "highpass", "bandpass", "notch", "allpass"] },
+            "cutoff": { "type": "number", "minimum": 20, "maximum": 20000 },
+            "resonance": { "type": "number", "minimum": 0.001, "maximum": 30 }
+          }
+        },
+        "reverb": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "type": { "type": "string", "enum": ["room", "hall", "plate", "spring", "chamber"] },
+            "mix": { "type": "number", "minimum": 0, "maximum": 1 },
+            "decay": { "type": "number", "minimum": 0.1, "maximum": 5 }
+          }
+        },
+        "delay": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "time": { "type": "number", "minimum": 10, "maximum": 2000 },
+            "feedback": { "type": "number", "minimum": 0, "maximum": 0.9 },
+            "mix": { "type": "number", "minimum": 0, "maximum": 1 },
+            "pingPong": { "type": "boolean" }
+          }
+        },
+        "chorus": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "rate": { "type": "number", "minimum": 0.1, "maximum": 5 },
+            "depth": { "type": "number", "minimum": 0, "maximum": 1 },
+            "mix": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "flanger": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "rate": { "type": "number", "minimum": 0.05, "maximum": 10 },
+            "depth": { "type": "number", "minimum": 0, "maximum": 1 },
+            "feedback": { "type": "number", "minimum": 0, "maximum": 0.9 },
+            "mix": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "phaser": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "rate": { "type": "number", "minimum": 0.05, "maximum": 10 },
+            "depth": { "type": "number", "minimum": 0, "maximum": 1 },
+            "stages": { "type": "integer", "enum": [2, 4, 6, 8] },
+            "mix": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "distortion": {
+          "type": ["object", "null"],
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "type": { "type": "string", "enum": ["soft", "hard", "fuzz", "tube", "tape", "transformer", "overdrive", "bitcrusher"] },
+            "drive": { "type": "number", "minimum": 1, "maximum": 100 },
+            "tone": { "type": "number", "minimum": 200, "maximum": 8000 },
+            "bitDepth": { "type": "number", "minimum": 1, "maximum": 16 },
+            "sampleRate": { "type": "number", "minimum": 500, "maximum": 44100 },
+            "mix": { "type": "number", "minimum": 0, "maximum": 1 },
+            "output": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "masterVolume": { "type": "number", "minimum": 0, "maximum": 1 },
+        "bpm": { "type": "number", "minimum": 30, "maximum": 300 },
+        "metronomeEnabled": { "type": "boolean" }
+      }
+    },
+    "looper": {
+      "type": "object",
+      "description": "Loop recorder slots",
+      "properties": {
+        "slots": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "recordedEvents": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": ["noteon", "noteoff"] },
+                    "note": { "type": "string" },
+                    "velocity": { "type": "number", "minimum": 0, "maximum": 1 },
+                    "time": { "type": "number" },
+                    "synthParams": { "type": "object" }
+                  }
+                }
+              },
+              "loopDuration": { "type": "number" },
+              "statusText": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "mixer": {
+      "type": "object",
+      "description": "Mixing console state",
+      "properties": {
+        "channels": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "gain": { "type": "number", "minimum": 0, "maximum": 2 },
+              "pan": { "type": "number", "minimum": -1, "maximum": 1 },
+              "muted": { "type": "boolean" },
+              "solo": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "samples": {
+      "type": "object",
+      "description": "Sample library metadata (buffers not serialized)",
+      "properties": {
+        "library": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "settings": {
+                "type": "object",
+                "properties": {
+                  "pitchShift": { "type": "number" },
+                  "loopEnabled": { "type": "boolean" },
+                  "loopStart": { "type": "number" },
+                  "loopEnd": { "type": "number" },
+                  "trimStart": { "type": "number" },
+                  "trimEnd": { "type": "number" },
+                  "adsr": {
+                    "type": "object",
+                    "properties": {
+                      "attack": { "type": "number" },
+                      "decay": { "type": "number" },
+                      "sustain": { "type": "number" },
+                      "release": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "drumPads": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "type": ["string", "null"] }
+        },
+        "samplerMode": { "type": "string", "enum": ["synth", "sampler"] }
+      }
+    },
+    "automation": {
+      "type": "object",
+      "description": "Parameter automation data",
+      "properties": {
+        "data": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "time": { "type": "number" },
+                  "value": { "type": "number", "minimum": 0, "maximum": 1 }
+                }
+              }
+            }
+          }
+        },
+        "mode": { "type": "string", "enum": ["off", "read", "write", "touch", "latch"] },
+        "selectedParam": { "type": "string" }
+      }
+    },
+    "lfos": {
+      "type": ["object", "null"],
+      "description": "Low Frequency Oscillator states",
+      "properties": {
+        "lfo1": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "target": { "type": "string" },
+            "waveform": { "type": "string", "enum": ["sine", "triangle", "square", "sawtooth", "random"] },
+            "rate": { "type": "number", "minimum": 0.01, "maximum": 20 },
+            "depth": { "type": "number", "minimum": 0, "maximum": 1 },
+            "phase": { "type": "number", "minimum": 0, "maximum": 360 }
+          }
+        },
+        "lfo2": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "target": { "type": "string" },
+            "waveform": { "type": "string", "enum": ["sine", "triangle", "square", "sawtooth", "random"] },
+            "rate": { "type": "number", "minimum": 0.01, "maximum": 20 },
+            "depth": { "type": "number", "minimum": 0, "maximum": 1 },
+            "phase": { "type": "number", "minimum": 0, "maximum": 360 }
+          }
+        }
+      }
+    },
+    "pianoRoll": {
+      "type": ["object", "null"],
+      "description": "Piano roll composition data",
+      "properties": {
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "note": { "type": "integer", "minimum": 0, "maximum": 127 },
+              "start": { "type": "number", "minimum": 0 },
+              "length": { "type": "number", "minimum": 0 },
+              "velocity": { "type": "integer", "minimum": 0, "maximum": 127 }
+            }
+          }
+        },
+        "gridSize": { "type": "integer" },
+        "length": { "type": "integer" }
+      }
+    },
+    "stepSequencer": {
+      "type": ["object", "null"],
+      "description": "Step sequencer pattern data",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "row": { "type": "integer" },
+                "col": { "type": "integer" },
+                "velocity": { "type": "integer", "minimum": 0, "maximum": 127 }
+              }
+            }
+          }
+        },
+        "currentPattern": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "steps": { "type": "integer", "minimum": 4, "maximum": 32 }
+      }
+    },
+    "arpeggiator": {
+      "type": ["object", "null"],
+      "description": "Arpeggiator configuration",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "mode": { "type": "string", "enum": ["up", "down", "updown", "random"] },
+        "rate": { "type": "integer", "minimum": 1, "maximum": 32 },
+        "octaves": { "type": "integer", "minimum": 1, "maximum": 4 }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "description": "User interface preferences",
+      "properties": {
+        "theme": {
+          "type": "string",
+          "enum": [
+            "midnight-drive",
+            "solarized-dark",
+            "crimson-peak",
+            "cyber-glow",
+            "forest-calm",
+            "ocean-depth",
+            "autumn-warmth",
+            "lavender-haze",
+            "desert-sunset",
+            "steampunk-gears",
+            "vintage-library",
+            "monochrome-noir",
+            "pastel-dream"
+          ]
+        },
+        "scale": { "type": "number", "minimum": 75, "maximum": 150 },
+        "synthesiaEnabled": { "type": "boolean" },
+        "numOctaves": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "visualizerSource": { "type": "string", "enum": ["master", "osc1", "osc2"] }
+      }
+    },
+    "templateName": {
+      "type": "string",
+      "description": "Template name if this is a saved template"
+    }
+  }
+}
