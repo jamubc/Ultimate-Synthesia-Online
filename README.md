@@ -55,6 +55,23 @@ Ultimate Synthesia Online is a feature-rich web-based synthesizer application bu
     * Persistent theme, UI scale, and Synthesia visibility settings via localStorage.
     * Footer with links to contributor GitHub profiles.
 
+## Advanced Mode (DAW)
+
+Click **Advanced Mode (DAW)** at the top of the page to open a full digital audio workstation that runs entirely in the browser. Everything you play on the on-screen keyboard, computer keyboard or MIDI controller goes to the selected track (or the armed track while recording). Your song autosaves in the browser.
+
+* **Arrangement:** unlimited instrument and audio tracks, MIDI and audio clips, drag to move (Alt-drag to copy, drag between tracks), trim both edges, split, duplicate, consolidate, mute and recolour clips, snap-to-grid (bar … 1/32, triplets), zoom, markers, loop region, insert/delete time, resizable tracks.
+* **Transport:** play/pause/stop, return to start, loop, metronome, one-bar count-in, follow playhead, tempo with tap tempo, time signatures (2/4 to 12/8), and a bars.beats.sixteenths + time display.
+* **Recording:** MIDI recording with loop overdub and record quantize, plus microphone recording onto armed audio tracks.
+* **Piano roll:** draw/select tools, move/resize/copy notes, marquee selection, velocity lane, quantize with strength, transpose, legato, humanize, double/half speed, reverse, chord stamping, scale highlighting with snap-to-scale, drum names for drum tracks, clip length handle.
+* **Instruments:** Ultimate Synth (same engine as the main panel, can be linked live to it), FM Synth, Pluck String (Karplus-Strong), Drawbar Organ, Drum Machine and a chromatic Sampler, each with presets.
+* **Plugins (audio effects):** Channel EQ (with response curve), Compressor and Limiter (with gain-reduction meters), Noise Gate, Reverb, Delay (tempo-synced, ping-pong), Chorus, Flanger, Phaser, Distortion, Bitcrusher, Auto Filter, Tremolo/Auto-Pan, Utility and a Spectrum Analyzer, each with presets, bypass and reordering. Plugins work on tracks, the two return buses and the master.
+* **Mixer:** channel strips with volume faders, pan, two post-fader sends (reverb and delay returns), mute/solo/arm, insert slots and stereo peak meters.
+* **Automation:** draw volume, pan and send automation per track.
+* **Files:** undo/redo history, save/open projects (audio included), import audio and MIDI files (or drag and drop them), export the mix or stems to WAV (16/24/32-bit, up to 96 kHz) through an offline render, and export MIDI.
+* Press **?** in the DAW to see the keyboard shortcuts.
+
+The DAW lives in the `daw/` folder: `daw-dsp.js` (instruments and plugins), `daw-engine.js` (mixer graph, scheduler, recording, file formats), `daw-ui.js`, `daw-pianoroll.js` and `daw.css`.
+
 ## How to Use
 
 1. Clone the repository or download the files.
@@ -66,6 +83,7 @@ Ultimate Synthesia Online is a feature-rich web-based synthesizer application bu
 7. Enable the "Falling Notes" for a visual playing guide.
 8. Use the Metronome and Tap Tempo to set the rhythm.
 9. Change UI themes and scale in the "Master & Settings" section.
+10. Click "Advanced Mode (DAW)" to arrange, record, mix and export full songs.
 
 ## Key JavaScript Components
 
