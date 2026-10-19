@@ -31,7 +31,9 @@ Ultimate Synthesia Online is a feature-rich web-based synthesizer application bu
     * On-screen virtual piano keyboard (1-4 octaves).
     * Computer keyboard mapping for playing notes.
     * Mouse and Touch input on the virtual keyboard with dragging support.
-    * MIDI input support.
+    * MIDI input from hardware controllers or a DAW (hot-plug aware, input port and channel selection, velocity, sustain pedal CC64, pitch bend ±2 semitones, All Notes Off CC123/CC120).
+    * MIDI output: notes played on the on-screen or computer keyboard (and the Space-bar sustain) can be sent to a DAW for recording.
+    * Optional BPM sync to incoming MIDI clock.
     * Sustain pedal functionality (via Space bar).
 * **Visuals & UI:**
     * Real-time audio visualizer (Master Output, Osc 1 Sum, Osc 2 Sum).
@@ -66,6 +68,19 @@ Ultimate Synthesia Online is a feature-rich web-based synthesizer application bu
 7. Enable the "Falling Notes" for a visual playing guide.
 8. Use the Metronome and Tap Tempo to set the rhythm.
 9. Change UI themes and scale in the "Master & Settings" section.
+
+## Using with a DAW
+
+Web MIDI works in Chrome, Edge and Opera (Firefox asks for a site permission; Safari is not supported). The page must be served over `https://` or `localhost`. Opening `index.html` as a local file also works in Chrome.
+
+1. **Create a virtual MIDI port:**
+    * **macOS:** open *Audio MIDI Setup* → *Window → Show MIDI Studio* → double-click *IAC Driver* → tick *Device is online*.
+    * **Windows:** install [loopMIDI](https://www.tobias-erichsen.de/software/loopmidi.html) and add a port.
+    * **Linux:** `sudo modprobe snd-virmidi`, or use a JACK/PipeWire MIDI bridge.
+2. **DAW → synth (play the synth from the DAW):** set a MIDI track's output to the virtual port. In the synth's **MIDI / DAW** panel, pick that port (or *All Inputs*) and a channel (*Omni* accepts all channels). Ports added after the page loads show up automatically.
+3. **Synth → DAW (record what you play):** pick the virtual port under **Output (to DAW)** and set it as the input of a MIDI track in your DAW. Use a different port from the one the DAW sends on, or turn off MIDI thru, to avoid feedback loops. Output goes out on the selected channel (channel 1 when set to Omni).
+4. **Tempo:** enable *Sync BPM to MIDI Clock* and turn on *Send MIDI Clock* in your DAW to have the metronome and looper follow the DAW tempo.
+5. Browsers block audio until you interact with the page, so **click anywhere on the page once** before pressing play in the DAW.
 
 ## Key JavaScript Components
 
