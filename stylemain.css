@@ -783,3 +783,9 @@ canvas#visualizerCanvas {
                 50% { transform: scale(1.8, 1.5); opacity: 0.6; }
                 100% { transform: scale(2.5, 0.5); opacity: 0; }
             }
+.midi-status {
+    margin-top: calc(10px * var(--font-scale-factor));
+    font-size: calc(0.8em * var(--font-scale-factor));
+    color: var(--text-muted-color);
+    line-height: 1.4;
+}
