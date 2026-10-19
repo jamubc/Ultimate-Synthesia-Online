@@ -82,6 +82,10 @@ Web MIDI works in Chrome, Edge and Opera (Firefox asks for a site permission; Sa
 4. **Tempo:** enable *Sync BPM to MIDI Clock* and turn on *Send MIDI Clock* in your DAW to have the metronome and looper follow the DAW tempo.
 5. Browsers block audio until you interact with the page, so **click anywhere on the page once** before pressing play in the DAW.
 
+## Deployment (GitHub Pages)
+
+The site is plain static files (`index.html` + `stylemain.css`), so GitHub Pages can serve it straight from `main` with no build step. One-time setup: in the repository, go to **Settings → Pages → Build and deployment**, set **Source** to **Deploy from a branch**, and pick **`main`** / **`/ (root)`**. After that, every merge to `main` updates the site automatically. GitHub Pages is served over HTTPS, which Web MIDI requires.
+
 ## Key JavaScript Components
 
 * **Audio Initialization (`initAudio`):** Sets up the `AudioContext`, master gain, limiter, analysers, and noise buffers.
